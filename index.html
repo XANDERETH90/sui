@@ -373,24 +373,42 @@ body.no-scroll{ overflow:hidden; }
   <body>
     <!-- NAV -->
     <nav class="nav">
-      <div class="container">
-        <a class="brand" href="#">
-        <img class="brand__logo" src="./suizai-logo.png" alt="$SUIZAI logo">
-        <span class="brand__name">$SUIZAI</span>
-        </a>
-        <div class="nav__links">
-          <!-- Mobile menu button -->
-          <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <span></span><span></span><span></span>
-          </button>
-          <a href="#about">About</a>
-          <a href="#tokenomics">Tokenomics</a>
-          <a href="#how">How to Buy</a>
-          <a href="#chart">Chart</a>
-          <a class="btn btn-primary" href="#buy"><i class="ti ti-rocket"></i> Buy Now</a>
-        </div>
-      </div>
-    </nav>
+  <div class="container">
+    <a class="brand" href="#">
+      <img class="brand__logo" src="./suizai-logo.png" alt="$SUIZAI logo">
+      <span class="brand__name">$SUIZAI</span>
+    </a>
+
+    <div class="nav__links">
+      <a href="#about">About</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#how">How to Buy</a>
+      <a href="#chart">Chart</a>
+      <a class="btn btn-primary" href="#buy"><i class="ti ti-rocket"></i> Buy Now</a>
+    </div>
+
+    <!-- Mobile menu button (visible on mobile only) -->
+    <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- Mobile fullscreen drawer -->
+<div id="mobileMenu" class="mobile-drawer" hidden>
+  <div class="drawer-inner">
+    <a href="#about"       class="mob-link">About</a>
+    <a href="#tokenomics"  class="mob-link">Tokenomics</a>
+    <a href="#how"         class="mob-link">How to Buy</a>
+    <a href="#chart"       class="mob-link">Chart</a>
+    <div class="mob-cta">
+      <a class="btn btn-primary" href="#buy">
+        <img src="./dexscreener-btn.png" alt="DEXScreener" class="btn-icon">
+        Buy Now
+      </a>
+    </div>
+  </div>
+</div>
+
 
 
     <!-- HERO -->
@@ -533,45 +551,54 @@ body.no-scroll{ overflow:hidden; }
       </div>
     </footer>
 
-    <script>
-      // Simple scroll reveal
-      const reveal = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){ e.target.style.transform='translateY(0)'; e.target.style.opacity='1'; reveal.unobserve(e.target); }
-        })
-      },{rootMargin:"-10% 0px -5% 0px"});
-      document.querySelectorAll('.panel__frame, .tok__card, .step').forEach(el=>{
-        el.style.transform = 'translateY(16px)';
-        el.style.opacity = '0';
-        el.style.transition = 'transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s';
-        reveal.observe(el);
-      });
-
-      // Soft parallax on hero images
-      const stage = document.querySelector('.suizai-stage');
-      const layers = stage ? stage.querySelectorAll('.cloud') : [];
-      if(stage){
-        stage.addEventListener('mousemove', (e)=>{
-          const r = stage.getBoundingClientRect();
-          const px = (e.clientX - r.left)/r.width - .5; // -0.5..0.5
-          const py = (e.clientY - r.top)/r.height - .5;
-          layers.forEach((layer, i)=>{
-            const depth = (i+1) * 10; // different speeds
-            layer.style.transform = `translate(${px * depth}px, ${py * depth}px)`;
-          });
-        });
-        stage.addEventListener('mouseleave', ()=>{
-          layers.forEach((layer)=> layer.style.transform = 'translate(0,0)');
-        });
+   <!-- UI scripts -->
+<script>
+  // Scroll reveal
+  const reveal = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.transform = 'translateY(0)';
+        e.target.style.opacity = '1';
+        reveal.unobserve(e.target);
       }
-      <script>
+    });
+  }, { rootMargin: "-10% 0px -5% 0px" });
+
+  document.querySelectorAll('.panel__frame, .tok__card, .step').forEach(el=>{
+    el.style.transform = 'translateY(16px)';
+    el.style.opacity = '0';
+    el.style.transition = 'transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s';
+    reveal.observe(el);
+  });
+
+  // (Optional) Parallax on hero (safe even if no .cloud layers exist)
+  const stage = document.querySelector('.suizai-stage');
+  const layers = stage ? stage.querySelectorAll('.cloud') : [];
+  if(stage && layers.length){
+    stage.addEventListener('mousemove', (e)=>{
+      const r = stage.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width - .5;
+      const py = (e.clientY - r.top)/r.height - .5;
+      layers.forEach((layer, i)=>{
+        const depth = (i+1) * 10;
+        layer.style.transform = `translate(${px * depth}px, ${py * depth}px)`;
+      });
+    });
+    stage.addEventListener('mouseleave', ()=>{
+      layers.forEach((layer)=> layer.style.transform = 'translate(0,0)');
+    });
+  }
+</script>
+
+<script>
+  // Mobile drawer (burger) toggle
   (function(){
-    const btn = document.querySelector('.burger');
+    const btn    = document.querySelector('.burger');
     const drawer = document.getElementById('mobileMenu');
     if(!btn || !drawer) return;
 
-    const open = () => { drawer.hidden = false; btn.setAttribute('aria-expanded','true'); document.body.classList.add('no-scroll'); };
-    const close = () => { drawer.hidden = true; btn.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
+    const open  = () => { drawer.hidden = false; btn.setAttribute('aria-expanded','true');  document.body.classList.add('no-scroll'); };
+    const close = () => { drawer.hidden = true;  btn.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
 
     btn.addEventListener('click', () => (btn.getAttribute('aria-expanded') === 'true' ? close() : open()));
     drawer.addEventListener('click', (e) => { if(e.target.classList.contains('mob-link')) close(); });
@@ -579,6 +606,5 @@ body.no-scroll{ overflow:hidden; }
   })();
 </script>
 
-    </script>
   </body>
 </html>
