@@ -436,6 +436,21 @@ body.no-scroll{ overflow:hidden; }
     top: -16px; left: 10px;                   /* small nudge so it still hugs the corner */
   }
 }
+/* --- Mobile footer fix: remove grey gap under Discord --- */
+@media (max-width: 640px){
+  footer{
+    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); /* more breathing room + iOS home indicator */
+    background-clip: padding-box; /* ensure the background fills added padding */
+  }
+  /* Sometimes the buttons row has margin-bottom; kill it on mobile */
+  footer .hero__actions { margin-bottom: 0 !important; }
+
+  /* If any last child in footer has a collapsing margin, absorb it */
+  footer > *:last-child { margin-bottom: 0 !important; }
+}
+
+/* As an extra guard on all sizes, make the footer background own the very edge */
+footer { background-color: #0a0920; } /* same family as your footer gradient */
 
 
     </style>
