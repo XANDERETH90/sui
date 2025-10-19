@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <!-- Dark blue sky -->
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="45%" r="80%">
+      <stop offset="0%" stop-color="#2d2b7a"/>
+      <stop offset="60%" stop-color="#1c184f"/>
+      <stop offset="100%" stop-color="#121238"/>
+    </radialGradient>
+
+    <!-- Comic rays -->
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a6bff" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="#5a6bff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Halftone dot pattern -->
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="2.2" fill="#8fb4ff" opacity=".18"/>
+      <circle cx="18" cy="18" r="2.2" fill="#8fb4ff" opacity=".18"/>
+    </pattern>
+
+    <!-- Cloud shape -->
+    <symbol id="cloud" viewBox="0 0 600 200">
+      <path d="M65 160c-30 0-55-18-55-45 0-25 19-43 45-45 8-27 35-50 75-50 35 0 61 17 71 41 9-7 22-11 35-11 30 0 54 18 60 43 2 0 3-1 5-1 28 0 49 18 49 43 0 25-21 45-49 45H65z"
+            fill="#ffffff"/>
+      <path d="M65 160c-30 0-55-18-55-45 0-25 19-43 45-45 8-27 35-50 75-50 35 0 61 17 71 41 9-7 22-11 35-11 30 0 54 18 60 43 2 0 3-1 5-1 28 0 49 18 49 43 0 25-21 45-49 45H65z"
+            fill="none" stroke="#0b0b16" stroke-width="12" opacity=".55"/>
+    </symbol>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+
+  <!-- Rays from center -->
+  <g transform="translate(960,520)">
+    <!-- 36 rays -->
+    <g>
+      <!-- one ray -->
+      <polygon points="0,0 8,-540 -8,-540" fill="url(#ray)"/>
+    </g>
+    <use href="#ray" />
+    <!-- rotate 36 times -->
+    <g>
+      <!-- we clone the polygon by rotation -->
+      <g id="r">
+        <polygon points="0,0 8,-540 -8,-540" fill="url(#ray)"/>
+      </g>
+      <g>
+        <use href="#r" transform="rotate(10)"/>
+        <use href="#r" transform="rotate(20)"/>
+        <use href="#r" transform="rotate(30)"/>
+        <use href="#r" transform="rotate(40)"/>
+        <use href="#r" transform="rotate(50)"/>
+        <use href="#r" transform="rotate(60)"/>
+        <use href="#r" transform="rotate(70)"/>
+        <use href="#r" transform="rotate(80)"/>
+        <use href="#r" transform="rotate(90)"/>
+        <use href="#r" transform="rotate(100)"/>
+        <use href="#r" transform="rotate(110)"/>
+        <use href="#r" transform="rotate(120)"/>
+        <use href="#r" transform="rotate(130)"/>
+        <use href="#r" transform="rotate(140)"/>
+        <use href="#r" transform="rotate(150)"/>
+        <use href="#r" transform="rotate(160)"/>
+        <use href="#r" transform="rotate(170)"/>
+        <use href="#r" transform="rotate(180)"/>
+        <use href="#r" transform="rotate(190)"/>
+        <use href="#r" transform="rotate(200)"/>
+        <use href="#r" transform="rotate(210)"/>
+        <use href="#r" transform="rotate(220)"/>
+        <use href="#r" transform="rotate(230)"/>
+        <use href="#r" transform="rotate(240)"/>
+        <use href="#r" transform="rotate(250)"/>
+        <use href="#r" transform="rotate(260)"/>
+        <use href="#r" transform="rotate(270)"/>
+        <use href="#r" transform="rotate(280)"/>
+        <use href="#r" transform="rotate(290)"/>
+        <use href="#r" transform="rotate(300)"/>
+        <use href="#r" transform="rotate(310)"/>
+        <use href="#r" transform="rotate(320)"/>
+        <use href="#r" transform="rotate(330)"/>
+        <use href="#r" transform="rotate(340)"/>
+        <use href="#r" transform="rotate(350)"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Halftone layer -->
+  <rect width="100%" height="100%" fill="url(#dots)"/>
+
+  <!-- Corner clouds -->
+  <use href="#cloud" x="-40" y="-10" width="560"/>
+  <use href="#cloud" x="1400" y="-20" width="560"/>
+  <use href="#cloud" x="-80" y="860" width="720"/>
+  <use href="#cloud" x="1320" y="860" width="680"/>
+</svg>
