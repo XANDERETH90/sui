@@ -524,6 +524,54 @@ footer { background-color: #0a0920; } /* same family as your footer gradient */
 @media (max-width: 640px){
   .ticker{ margin-top: 12px; }
 }
+/* ============ 1) MOBILE HERO BUTTONS: two up top, one centered below ============ */
+@media (max-width: 640px){
+  .hero__actions{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* two columns */
+    gap: 10px;
+    align-items: stretch;
+  }
+  .hero__actions .btn{
+    width: 100%;
+    justify-content: center;
+    padding: 12px 14px;              /* same height for all three */
+  }
+  /* DEX icon downsize so it matches the other buttons' height */
+  .hero__actions .btn img.btn-icon{
+    height: 1.4em !important;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  /* Third button: take its own row and center at half page width */
+  .hero__actions .btn:nth-child(3){
+    grid-column: 1 / -1;             /* new row */
+    justify-self: center;
+    width: min(290px, 80%);          /* ~half page feel, centered */
+  }
+}
+
+/* ============ 2) HEADINGS +4px in TOKENOMICS & HOW-TO-BUY ============ */
+/* Tokenomics card titles */
+.tok__card h3{
+  /* +4px vs site default — scales on desktop, readable on mobile */
+  font-size: clamp(26px, 2.6vw, 36px);
+}
+
+/* How-to-buy step titles (desktop/tablet) */
+.step h3{
+  /* previously clamp(24px, 2.6vw, 30px) — add ~4px headroom */
+  font-size: clamp(28px, 3vw, 34px);
+}
+/* How-to-buy titles on mobile: +4px (26px → 30px) */
+@media (max-width: 640px){
+  .step h3{ font-size: 30px; }
+}
+
+/* ============ 3) TICKER: give it more breathing room on mobile ============ */
+@media (max-width: 640px){
+  .ticker{ margin-top: 24px; }  /* was 12px */
+}
 
 
     </style>
