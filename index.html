@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>$SUIZAI – The Cartoon-Ready Meme Coin</title>
+
+    <!-- Comic book fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Headline: Bangers | Body: Rubik -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+    <style>
+      :root {
+        /* SUIZAI core palette (tuned to your art): */
+        --ink: #0b0b16;
+        --panel: #101027;
+        --sky-1: #5927ff;      /* purple */
+        --sky-2: #2ad1ff;      /* cyan */
+        --pop: #ff36b6;        /* magenta accent */
+        --sun: #ffe14d;        /* yellow accent */
+        --paper: #ffffff;
+        --muted: #a9b1ff;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        color: var(--paper);
+        background: radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.12), transparent 60%),
+                    linear-gradient(180deg, #120f2a 0%, #0a0920 100%);
+        font-family: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        overflow-x: hidden;
+      }
+
+      /* Utility */
+      .container { width: min(1100px, 90vw); margin: 0 auto; }
+      .stack { display: grid; gap: 18px; }
+      .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 16px; font-weight: 700; text-decoration: none; border: 3px solid var(--ink); box-shadow: 0 6px 0 #00000060; transition: transform .15s ease, box-shadow .15s ease; }
+      .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 0 #00000040; }
+      .btn:active { transform: translateY(0); box-shadow: 0 4px 0 #00000080; }
+      .btn-primary { background: linear-gradient(135deg, var(--pop), var(--sky-1)); color: var(--paper); }
+      .btn-ghost { background: #ffffff10; color: var(--paper); border-color: #00000050; }
+
+      /* Comic headline treatment */
+      .h1, h1, h2, h3 { font-family: 'Bangers', system-ui; letter-spacing: .5px; text-transform: uppercase; color: var(--sun); -webkit-text-stroke: 2px #000; text-shadow: 0 6px 0 #00000060, 0 0 30px #ff36b660; }
+      h1 { font-size: clamp(56px, 6vw, 96px); line-height: .9; margin: 0; }
+      h2 { font-size: clamp(36px, 4vw, 64px); line-height: .95; margin: 0; }
+      h3 { font-size: clamp(22px, 2.5vw, 32px); margin: 0; }
+      p, li { font-size: clamp(16px, 1.4vw, 18px); color: #f0f2ff; }
+
+      /* Sticky nav */
+      .nav {
+        position: fixed; inset: 0 0 auto; height: 68px; display: flex; align-items: center; z-index: 30;
+        backdrop-filter: blur(8px);
+        background: linear-gradient(90deg, #0a0920aa, #0f0d2acc);
+        border-bottom: 2px solid #00000060; box-shadow: 0 10px 30px #00000040;
+      }
+      .nav > .container { display: flex; align-items: center; justify-content: space-between; }
+      .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+      .brand__logo { width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--sky-2), var(--sky-1)); border: 2px solid #000; box-shadow: inset 0 0 0 3px #ffffff20; }
+      .brand__name { font-family: 'Bangers'; font-size: 28px; color: var(--sun); -webkit-text-stroke: 1.5px #000; text-shadow: 0 3px 0 #00000080; }
+      .nav__links { display: flex; align-items: center; gap: 18px; }
+      .nav__links a { color: #fff; text-decoration: none; font-weight:700; padding: 10px 12px; border-radius: 10px; border: 2px solid transparent; }
+      .nav__links a:hover { border-color: #ffffff40; background: #ffffff10; }
+
+      /* Hero with layered SUIZAI */
+      .hero { position: relative; padding-top: 110px; }
+      .hero__wrap { display:grid; grid-template-columns: 1.1fr .9fr; align-items:center; gap: 28px; min-height: min(720px, 86vh); }
+      .hero__copy .lead { font-size: clamp(18px, 1.8vw, 22px); opacity:.95; }
+      .hero__actions { display:flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; }
+
+      /* Halftone background + speed lines */
+      .hero::before { content:""; position:absolute; inset:-6px; background:
+        radial-gradient(circle at 20% 10%, #ffffff20 0 12%, transparent 13% 100%),
+        radial-gradient(circle at 80% 30%, #ffffff15 0 8%, transparent 9% 100%),
+        linear-gradient(110deg, #5927ff33 0%, #2ad1ff19 50%, transparent 70%),
+        repeating-linear-gradient( 120deg, #ffffff12 0 4px, transparent 4px 12px);
+        mask: linear-gradient(180deg, #000, transparent 70%);
+        pointer-events:none; z-index:0; }
+
+      .suizai-stage { position: relative; height: 520px; border: 4px solid #000; border-radius: 28px; background: linear-gradient(180deg,#1a1740 0%, #0a0920 70%); box-shadow: 0 14px 0 #00000070, 0 40px 120px #3d2bff50; overflow:hidden; }
+      .cloud { position:absolute; filter: drop-shadow(0 6px 0 #00000065); opacity:.95; }
+      .cloud img { display:block; height: 100%; width:auto; }
+      .cloud--1 { height: 92%; left: -2%; bottom: -6%; animation: floatY 8s ease-in-out infinite; }
+      .cloud--2 { height: 74%; right: -6%; bottom: -2%; animation: floatY 10s ease-in-out reverse infinite; }
+      .cloud--3 { height: 60%; left: 50%; transform: translateX(-50%); top: 6%; animation: bob 11s ease-in-out infinite; }
+
+      @keyframes floatY { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-12px); } }
+      @keyframes bob { 0%,100%{ transform: translate(-50%,0) rotate(-2deg); } 50%{ transform: translate(-50%,-10px) rotate(2deg); } }
+
+      /* Section frames – comic panels */
+      section.panel { position:relative; padding: 84px 0; }
+      .panel .panel__frame { border: 4px solid #000; border-radius: 28px; padding: clamp(22px, 3vw, 36px); background: linear-gradient(160deg, #15143a, #0f0e2c 40%, #0a0920 100%); box-shadow: 0 14px 0 #00000070, 0 40px 120px #3d2bff50; }
+      .panel .headline { margin-bottom: 18px; }
+
+      /* About panel with parallax character */
+      .about__grid { display:grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items:center; }
+      .about__art { position:relative; min-height: 420px; }
+      .about__art .bubble { position:absolute; right: 10px; top: 14px; background: var(--sun); color:#000; font-family:'Bangers'; padding: 12px 16px; border: 3px solid #000; border-radius: 14px; transform: rotate(2deg); box-shadow: 0 12px 0 #00000060; }
+      .about__avatar { position:absolute; inset:auto 0 0 0; margin:auto; height: 100%; display:flex; align-items:flex-end; justify-content:center; pointer-events:none; }
+      .about__avatar img { width: auto; height: 100%; filter: drop-shadow(0 10px 0 #00000080); animation: floatY 9s ease-in-out infinite; }
+
+      /* Tokenomics cards */
+      .tok__grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+      .tok__card { background: linear-gradient(180deg, #181642, #121133); border: 4px solid #000; border-radius: 24px; padding: 20px; box-shadow: 0 10px 0 #00000070; text-align:center; }
+      .tok__card:hover { transform: translateY(-4px); }
+      .tok__value { font-family:'Bangers'; font-size: 42px; color: var(--muted); -webkit-text-stroke: 1.5px #000; text-shadow: 0 4px 0 #00000080; }
+
+      /* How to buy – comic steps */
+      .steps { display:grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+      .step { background: #ffffff0f; border: 4px solid #000; border-radius: 22px; padding: 22px; position:relative; box-shadow: 0 10px 0 #00000070; }
+      .step::before { content: attr(data-step); position:absolute; left: -10px; top: -14px; background: var(--sun); color:#000; font-family:'Bangers'; font-size: 26px; border: 3px solid #000; border-radius: 12px; padding: 6px 10px; box-shadow: 0 6px 0 #00000070; }
+
+      /* Chart / iframe */
+      .chart { border: 4px solid #000; border-radius: 24px; overflow: hidden; box-shadow: 0 14px 0 #00000070; background: #0b0a1f; }
+      .chart iframe { display:block; width: 100%; height: 480px; border: 0; }
+
+      /* Footer */
+      footer { padding: 60px 0 80px; text-align:center; opacity: .9; }
+
+      /* Marquee strip */
+      .marquee { position: relative; border-block: 4px solid #000; background: linear-gradient(90deg, #281a7a, #1a1464); box-shadow: inset 0 -10px 0 #00000070, inset 0 10px 0 #00000070; overflow: hidden; }
+      .marquee__inner { display:flex; gap: 40px; padding: 12px 0; animation: slide 18s linear infinite; }
+      .marquee__inner span { font-family: 'Bangers'; font-size: 28px; color: var(--sun); -webkit-text-stroke: 1.5px #000; text-shadow: 0 4px 0 #00000080; }
+      @keyframes slide { from { transform: translateX(0);} to { transform: translateX(-50%);} }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero__wrap { grid-template-columns: 1fr; }
+        .tok__grid { grid-template-columns: repeat(2,1fr); }
+        .steps { grid-template-columns: repeat(2,1fr); }
+        .about__grid { grid-template-columns: 1fr; }
+        .suizai-stage { height: 420px; }
+      }
+      @media (max-width: 640px) {
+        .tok__grid, .steps { grid-template-columns: 1fr; }
+        .nav__links { display:none; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <div class="container">
+        <a class="brand" href="#">
+          <span class="brand__logo" aria-hidden="true"></span>
+          <span class="brand__name">$SUIZAI</span>
+        </a>
+        <div class="nav__links">
+          <a href="#about">About</a>
+          <a href="#tokenomics">Tokenomics</a>
+          <a href="#how">How to Buy</a>
+          <a href="#chart">Chart</a>
+          <a class="btn btn-primary" href="#buy"><i class="ti ti-rocket"></i> Buy Now</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero" id="home">
+      <div class="container hero__wrap">
+        <div class="hero__copy">
+          <h1>$SUIZAI</h1>
+          <p class="lead">Your blue‑skinned, purple‑locked chaos goblin of the chain. Meme‑first, utility‑later but vibes <strong>right now</strong>. Built for fun traders, degen poets, and cartoon maximalists.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn-primary" href="#buy"><i class="ti ti-currency-bitcoin"></i> Launch DEX</a>
+            <a class="btn btn-ghost" href="#tokenomics"><i class="ti ti-chart-pie"></i> Tokenomics</a>
+            <a class="btn btn-ghost" href="#about"><i class="ti ti-brand-telegram"></i> Join Telegram</a>
+          </div>
+        </div>
+
+        <!-- Layered character stage (swap images below for your art) -->
+        <div class="suizai-stage" aria-hidden="true">
+          <!-- Place the 3 character images next to this file and adjust paths if needed -->
+          <div class="cloud cloud--1"><img src="./suizai-1.jpg" alt="SUIZAI pose 1"></div>
+          <div class="cloud cloud--2"><img src="./suizai-2.jpg" alt="SUIZAI pose 2"></div>
+          <div class="cloud cloud--3"><img src="./suizai-3.jpg" alt="SUIZAI pose 3"></div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__inner">
+          <span>NO TAX</span>
+          <span>LP BURNED</span>
+          <span>RENOUNCED</span>
+          <span>100% COMMUNITY</span>
+          <span>NO TAX</span>
+          <span>LP BURNED</span>
+          <span>RENOUNCED</span>
+          <span>100% COMMUNITY</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="panel" id="about">
+      <div class="container panel__frame">
+        <div class="about__grid">
+          <div class="about__copy stack">
+            <h2 class="headline">Meet the menace</h2>
+            <p>SUIZAI is a street‑smart sprite with a heart of pure degen. The lore links each section with a new scene – a different drawing of SUIZAI slides in, bobs, and nods as you scroll. The whole site feels like flipping comic panels.</p>
+            <p><strong>Chain:</strong> Solana • <strong>Ticker:</strong> $SUIZAI • <strong>Supply:</strong> 1,000,000,000</p>
+            <div>
+              <a class="btn btn-primary" href="#buy"><i class="ti ti-hand-click"></i> Get $SUIZAI</a>
+              <a class="btn btn-ghost" href="#chart"><i class="ti ti-chart-line"></i> Live Chart</a>
+            </div>
+          </div>
+          <div class="about__art">
+            <div class="bubble">SUIZAI SAYS: WAGMI</div>
+            <div class="about__avatar">
+              <!-- Swap this single focused PNG/JPG to your preferred portrait -->
+              <img src="./suizai-hero.png" alt="Suizai closeup">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENOMICS -->
+    <section class="panel" id="tokenomics">
+      <div class="container panel__frame stack">
+        <h2 class="headline">Tokenomics</h2>
+        <div class="tok__grid">
+          <div class="tok__card stack">
+            <h3>Total Supply</h3>
+            <div class="tok__value">1,000,000,000</div>
+            <p>Fixed supply. No mint. No nonsense.</p>
+          </div>
+          <div class="tok__card stack">
+            <h3>Liquidity</h3>
+            <div class="tok__value">90%</div>
+            <p>Added at launch. LP burned, keys tossed.</p>
+          </div>
+          <div class="tok__card stack">
+            <h3>Community</h3>
+            <div class="tok__value">5%</div>
+            <p>Giveaways, raids, art bounties.</p>
+          </div>
+          <div class="tok__card stack">
+            <h3>Ops</h3>
+            <div class="tok__value">5%</div>
+            <p>Listings, infra, memes that slap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO BUY -->
+    <section class="panel" id="how">
+      <div class="container panel__frame stack">
+        <h2 class="headline">How to buy</h2>
+        <div class="steps">
+          <div class="step stack" data-step="01">
+            <h3>Make a wallet</h3>
+            <p>Install Phantom (or your fav Solana wallet). Save your seed like your life depends on it.</p>
+          </div>
+          <div class="step stack" data-step="02">
+            <h3>Get SOL</h3>
+            <p>Buy SOL on a CEX (Coinbase, Binance, etc.) and send to your wallet.</p>
+          </div>
+          <div class="step stack" data-step="03">
+            <h3>Open a DEX</h3>
+            <p>Use Jupiter or Raydium. Connect wallet. Paste the official $SUIZAI address.</p>
+          </div>
+          <div class="step stack" data-step="04">
+            <h3>Swap & celebrate</h3>
+            <p>Trade SOL → $SUIZAI. Welcome to the cartoon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHART -->
+    <section class="panel" id="chart">
+      <div class="container panel__frame stack">
+        <h2 class="headline">Live chart</h2>
+        <div class="chart">
+          <!-- Replace the placeholder pair address with your own when live -->
+          <iframe src="https://dexscreener.com/solana/PLACEHOLDERPAIR?embed=1&theme=dark"></iframe>
+        </div>
+        <div style="text-align:center">
+          <a class="btn btn-primary" href="https://dexscreener.com/" target="_blank" rel="noopener">Open in DEXScreener</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container stack" style="align-items:center;">
+        <img src="./suizai-mark.png" alt="$SUIZAI mark" style="height:60px; filter: drop-shadow(0 6px 0 #00000070);">
+        <p>© 2025 $SUIZAI. Comics, chaos, community.</p>
+        <div class="hero__actions" id="buy">
+          <a class="btn btn-primary" href="#"><i class="ti ti-brand-telegram" aria-hidden="true"></i> Telegram</a>
+          <a class="btn btn-ghost" href="#"><i class="ti ti-brand-x" aria-hidden="true"></i> X / Twitter</a>
+          <a class="btn btn-ghost" href="#"><i class="ti ti-brand-discord" aria-hidden="true"></i> Discord</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple scroll reveal
+      const reveal = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.style.transform='translateY(0)'; e.target.style.opacity='1'; reveal.unobserve(e.target); }
+        })
+      },{rootMargin:"-10% 0px -5% 0px"});
+      document.querySelectorAll('.panel__frame, .tok__card, .step').forEach(el=>{
+        el.style.transform = 'translateY(16px)';
+        el.style.opacity = '0';
+        el.style.transition = 'transform .7s cubic-bezier(.2,.8,.2,1), opacity .7s';
+        reveal.observe(el);
+      });
+
+      // Soft parallax on hero images
+      const stage = document.querySelector('.suizai-stage');
+      const layers = stage ? stage.querySelectorAll('.cloud') : [];
+      if(stage){
+        stage.addEventListener('mousemove', (e)=>{
+          const r = stage.getBoundingClientRect();
+          const px = (e.clientX - r.left)/r.width - .5; // -0.5..0.5
+          const py = (e.clientY - r.top)/r.height - .5;
+          layers.forEach((layer, i)=>{
+            const depth = (i+1) * 10; // different speeds
+            layer.style.transform = `translate(${px * depth}px, ${py * depth}px)`;
+          });
+        });
+        stage.addEventListener('mouseleave', ()=>{
+          layers.forEach((layer)=> layer.style.transform = 'translate(0,0)');
+        });
+      }
+    </script>
+  </body>
+</html>
