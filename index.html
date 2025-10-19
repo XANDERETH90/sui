@@ -261,34 +261,30 @@ footer .hero__actions {
 #chart{
   position: relative; /* ensure the ::before attaches correctly */
 }
-/* Clouds layer */
+/* === Image background behind Live Chart === */
+#chart{
+  position: relative;
+  overflow: visible; /* allow glow to breathe */
+}
+
+/* Background image layer */
 #chart::before{
   content:"";
   position:absolute;
-  inset:0;
-  z-index:0;
-  /* layered 'cartoon' clouds in cool blues/purples */
-  background:
-    radial-gradient(circle at 10% 25%, #7fd3ff 0 12%, transparent 13% 100%),
-    radial-gradient(circle at 28% 18%, #a5e4ff 0 10%, transparent 11% 100%),
-    radial-gradient(circle at 35% 36%, #8bd2ff 0 14%, transparent 15% 100%),
-    radial-gradient(circle at 62% 22%, #7ec8ff 0 13%, transparent 14% 100%),
-    radial-gradient(circle at 78% 30%, #a5d9ff 0 12%, transparent 13% 100%),
-    radial-gradient(circle at 84% 48%, #8ad7ff 0 16%, transparent 17% 100%),
-    radial-gradient(circle at 18% 58%, #95d6ff 0 14%, transparent 15% 100%),
-    radial-gradient(circle at 48% 66%, #7fcaff 0 16%, transparent 17% 100%),
-    /* soft sky gradient under clouds */
-    linear-gradient(180deg, #241a67 0%, #1a1652 35%, #12123a 100%);
-  filter: saturate(1.1) contrast(1.05);
+  inset: -40px 0 -40px 0;        /* extend a bit beyond for a nice bleed */
+  z-index: 0;
+  background: url("./clouds-bg.svg") center/cover no-repeat;
+  filter: saturate(1.05) contrast(1.05);
 }
 
-/* Lift the panel above the clouds */
-#chart .panel__frame{ position: relative; z-index: 1; }
-
-/* Optional: give the chart box a slightly translucent panel so clouds peek around edges */
+/* Keep the chart panel above the background */
 #chart .panel__frame{
-  background: linear-gradient(160deg, rgba(21,20,58,.96), rgba(15,14,44,.96) 40%, rgba(10,9,32,.96) 100%);
-}  
+  position: relative;
+  z-index: 1;
+  /* Slight transparency so the background vibe peeks around edges (optional) */
+  background: linear-gradient(160deg, rgba(21,20,58,.97), rgba(15,14,44,.97) 40%, rgba(10,9,32,.97) 100%);
+}
+
     </style>
   </head>
   <body>
