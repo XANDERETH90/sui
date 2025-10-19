@@ -366,6 +366,13 @@ body.no-scroll{ overflow:hidden; }
   .nav__links{ display:none; }   /* you already hide this; keeping for clarity */
   .burger{ display:inline-flex; align-items:center; justify-content:center; }
 }
+/* Force desktop defaults explicitly */
+@media (min-width: 641px){
+  .nav__links { display: flex !important; gap: 18px; align-items: center; }
+  .burger { display: none !important; }
+  /* Ensure the drawer can't cover desktop view even if toggled somehow */
+  #mobileMenu[hidden] { display: none !important; }
+}
 
 
     </style>
