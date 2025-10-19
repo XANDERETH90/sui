@@ -52,7 +52,18 @@
       h1 { font-size: clamp(56px, 6vw, 96px); line-height: .9; margin: 0; }
       h2 { font-size: clamp(36px, 4vw, 64px); line-height: .95; margin: 0; }
       h3 { font-size: clamp(22px, 2.5vw, 32px); margin: 0; }
-      p, li { font-size: clamp(16px, 1.4vw, 18px); color: #f0f2ff; }
+      /* Comic body copy */
+      p, li {
+              font-family: 'Bangers', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+              text-transform: uppercase;
+              letter-spacing: .5px;
+              color: #ffffff;
+              -webkit-text-stroke: 0.8px #000;     /* subtle outline like comic panels */
+              text-shadow: 0 2px 0 #00000080;      /* gives the stamped look */
+              font-size: clamp(18px, 1.6vw, 20px);
+              line-height: 1.22;
+            }
+
 
       /* Sticky nav */
       .nav {
