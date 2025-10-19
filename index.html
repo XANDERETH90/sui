@@ -389,6 +389,53 @@ body.no-scroll{ overflow:hidden; }
   .burger { display: inline-flex; align-items: center; justify-content: center; }
   .nav__links { display: none !important; }   /* keep desktop links hidden on mobile */
 }
+/* === How To Buy – spacing + size fixes (desktop + mobile) === */
+
+/* Give the step cards more top padding so the badge doesn't clash */
+.step {
+  position: relative;
+  padding-top: 44px;            /* was ~24–30; extra room for badge + header */
+}
+
+/* Make headings larger, move right and slightly down */
+.step h3 {
+  font-size: clamp(24px, 2.6vw, 30px);  /* bigger title */
+  line-height: 1.05;
+  margin: 6px 12px 10px 28px;           /* right/left spacing */
+  transform: translateY(2px);           /* subtle drop */
+}
+
+/* Reposition the yellow number badge so it sits just outside the top-left corner */
+.step .badge,
+.step .step__num,
+.step .step-num {
+  position: absolute;
+  top: -18px;                 /* lift above the card frame */
+  left: 12px;                 /* keep visually attached to the corner */
+  z-index: 2;
+}
+
+/* If your badge is absolutely positioned with different class names, the three selectors above cover the common cases. */
+
+/* Fine-tune the inner paragraph spacing now that the header moved */
+.step p {
+  margin-top: 8px;
+}
+
+/* --- Mobile tweaks --- */
+@media (max-width: 640px){
+  .step { padding-top: 48px; }                /* a touch more space for smaller screens */
+  .step h3 {
+    font-size: 26px;                          /* larger than before, readable on phones */
+    margin-left: 24px;                        /* keep away from the left border */
+    transform: translateY(4px);
+  }
+  .step .badge,
+  .step .step__num,
+  .step .step-num {
+    top: -16px; left: 10px;                   /* small nudge so it still hugs the corner */
+  }
+}
 
 
     </style>
