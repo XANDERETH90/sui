@@ -74,6 +74,15 @@
         color: var(--paper);
         border-color: #00000050;
       }
+      /* Make DEXScreener logo bigger inside Launch DEX button */
+      .btn-icon {
+        height: 1.8em;          /* increase size (default was ~1.2em) */
+        width: auto;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;      /* little gap before text */
+      }
+
 
       /* Comic headline treatment */
       .h1, h1, h2, h3 { font-family: 'Bangers', system-ui; letter-spacing: .5px; text-transform: uppercase; color: var(--sun); -webkit-text-stroke: 2px #000; text-shadow: 0 6px 0 #00000060, 0 0 30px #ff36b660; }
@@ -314,7 +323,7 @@ footer .hero__actions {
           <p class="lead">Your blue‑skinned, purple‑locked chaos goblin of the chain. Meme‑first, utility‑later but vibes <strong>right now</strong>. Built for fun traders, degen poets, and cartoon maximalists.
           </p>
           <div class="hero__actions">
-            <a class="btn btn-primary" href="#buy"><img src="./dexscreener-btn.png" alt="DEXScreener"> Launch DEX</a>
+            <a class="btn btn-primary" href="#buy"><img src="./dexscreener-btn.png" alt="DEXScreener" class="btn-icon"> Launch DEX</a>
             <a class="btn btn-ghost" href="#tokenomics"><i class="ti ti-chart-pie"></i> Tokenomics</a>
             <a class="btn btn-ghost" href="#about"><i class="ti ti-brand-telegram"></i> Join Telegram</a>
           </div>
