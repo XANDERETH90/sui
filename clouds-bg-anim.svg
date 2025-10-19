@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- SKY -->
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="45%" r="80%">
+      <stop offset="0%" stop-color="#2d2b7a"/>
+      <stop offset="60%" stop-color="#1c184f"/>
+      <stop offset="100%" stop-color="#121238"/>
+    </radialGradient>
+
+    <!-- comic sun rays -->
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5a6bff" stop-opacity=".28"/>
+      <stop offset="100%" stop-color="#5a6bff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- halftone pattern -->
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="2.2" fill="#8fb4ff" opacity=".18"/>
+      <circle cx="18" cy="18" r="2.2" fill="#8fb4ff" opacity=".18"/>
+    </pattern>
+
+    <!-- single cloud -->
+    <symbol id="cloud" viewBox="0 0 600 200">
+      <path d="M65 160c-30 0-55-18-55-45 0-25 19-43 45-45 8-27 35-50 75-50 35 0 61 17 71 41 9-7 22-11 35-11 30 0 54 18 60 43 2 0 3-1 5-1 28 0 49 18 49 43 0 25-21 45-49 45H65z"
+            fill="#fff"/>
+      <path d="M65 160c-30 0-55-18-55-45 0-25 19-43 45-45 8-27 35-50 75-50 35 0 61 17 71 41 9-7 22-11 35-11 30 0 54 18 60 43 2 0 3-1 5-1 28 0 49 18 49 43 0 25-21 45-49 45H65z"
+            fill="none" stroke="#0b0b16" stroke-width="12" opacity=".55"/>
+    </symbol>
+  </defs>
+
+  <!-- base sky -->
+  <rect width="100%" height="100%" fill="url(#sky)"/>
+
+  <!-- rays -->
+  <g transform="translate(960,520)">
+    <g id="r"><polygon points="0,0 8,-560 -8,-560" fill="url(#ray)"/></g>
+    <use href="#r" transform="rotate(0)"/>
+    <use href="#r" transform="rotate(10)"/>
+    <use href="#r" transform="rotate(20)"/>
+    <use href="#r" transform="rotate(30)"/>
+    <use href="#r" transform="rotate(40)"/>
+    <use href="#r" transform="rotate(50)"/>
+    <use href="#r" transform="rotate(60)"/>
+    <use href="#r" transform="rotate(70)"/>
+    <use href="#r" transform="rotate(80)"/>
+    <use href="#r" transform="rotate(90)"/>
+    <use href="#r" transform="rotate(100)"/>
+    <use href="#r" transform="rotate(110)"/>
+    <use href="#r" transform="rotate(120)"/>
+    <use href="#r" transform="rotate(130)"/>
+    <use href="#r" transform="rotate(140)"/>
+    <use href="#r" transform="rotate(150)"/>
+    <use href="#r" transform="rotate(160)"/>
+    <use href="#r" transform="rotate(170)"/>
+    <use href="#r" transform="rotate(180)"/>
+    <use href="#r" transform="rotate(190)"/>
+    <use href="#r" transform="rotate(200)"/>
+    <use href="#r" transform="rotate(210)"/>
+    <use href="#r" transform="rotate(220)"/>
+    <use href="#r" transform="rotate(230)"/>
+    <use href="#r" transform="rotate(240)"/>
+    <use href="#r" transform="rotate(250)"/>
+    <use href="#r" transform="rotate(260)"/>
+    <use href="#r" transform="rotate(270)"/>
+    <use href="#r" transform="rotate(280)"/>
+    <use href="#r" transform="rotate(290)"/>
+    <use href="#r" transform="rotate(300)"/>
+    <use href="#r" transform="rotate(310)"/>
+    <use href="#r" transform="rotate(320)"/>
+    <use href="#r" transform="rotate(330)"/>
+    <use href="#r" transform="rotate(340)"/>
+    <use href="#r" transform="rotate(350)"/>
+  </g>
+
+  <!-- halftone -->
+  <rect width="100%" height="100%" fill="url(#dots)"/>
+
+  <!-- moving cloud bands (3 layers) -->
+  <!-- Near top -->
+  <g id="band1" opacity=".95" transform="translate(-300,40)">
+    <use href="#cloud" x="0"   y="0" width="520"/>
+    <use href="#cloud" x="520" y="10" width="520"/>
+    <use href="#cloud" x="1040" y="-10" width="520"/>
+    <use href="#cloud" x="1560" y="5" width="520"/>
+    <!-- animate to the right -->
+    <animateTransform attributeName="transform" type="translate"
+      from="-300,40" to="300,40" dur="40s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Middle -->
+  <g id="band2" opacity=".9" transform="translate(300,420)">
+    <use href="#cloud" x="0"   y="0" width="560"/>
+    <use href="#cloud" x="560" y="20" width="560"/>
+    <use href="#cloud" x="1120" y="-10" width="560"/>
+    <animateTransform attributeName="transform" type="translate"
+      from="300,420" to="-300,420" dur="55s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Bottom -->
+  <g id="band3" opacity=".95" transform="translate(-260,860)">
+    <use href="#cloud" x="0"   y="0" width="680"/>
+    <use href="#cloud" x="680" y="10" width="680"/>
+    <use href="#cloud" x="1360" y="-6" width="680"/>
+    <animateTransform attributeName="transform" type="translate"
+      from="-260,860" to="260,860" dur="70s" repeatCount="indefinite"/>
+  </g>
+</svg>
