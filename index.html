@@ -172,8 +172,28 @@ footer .footer__mark {
 footer .hero__actions { 
   justify-content: center; 
 }
-
-      
+/* Ensure the hero image shows up clearly */
+.suizai-stage {
+  position: relative;
+  height: 520px;                 /* keep your panel height */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+}
+.suizai-stage .stage__img {
+  display: block;
+  width: auto;
+  height: 100%;                  /* fill panel height */
+  max-width: none;
+  image-rendering: auto;
+  filter: drop-shadow(0 10px 0 #00000080);
+  animation: floatY 9s ease-in-out infinite;
+}
+@media (max-width: 640px) {
+  .suizai-stage { height: 420px; }
+}
     </style>
   </head>
   <body>
@@ -210,7 +230,7 @@ footer .hero__actions {
 
         <!-- Layered character stage (swap images below for your art) -->
         <div class="suizai-stage" aria-hidden="true">
-  <img class="stage__img" src="./suizai-hero.jpg" alt="SUIZAI hero">
+  <img class="stage__img" src="/suizai-hero.jpg" alt="SUIZAI hero">
 </div>
 
       </div>
