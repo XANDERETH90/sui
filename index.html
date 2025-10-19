@@ -142,6 +142,38 @@
         .tok__grid, .steps { grid-template-columns: 1fr; }
         .nav__links { display:none; }
       }
+      /* === SUIZAI overrides (single hero image & footer align) === */
+.suizai-stage { 
+  display: flex; 
+  align-items: flex-end; 
+  justify-content: center; 
+}
+.suizai-stage .stage__img { 
+  height: 100%; 
+  width: auto; 
+  filter: drop-shadow(0 10px 0 #00000080); 
+  animation: floatY 9s ease-in-out infinite; 
+}
+
+/* icon inside buttons: keeps logo aligned with text baseline */
+.hero__actions .btn img { 
+  height: 1.2em; 
+  width: auto; 
+  display: inline-block; 
+  vertical-align: -2px; 
+}
+
+/* footer logo: ~3x larger and centered above the buttons */
+footer .footer__mark { 
+  height: 180px; 
+  display: block; 
+  margin: 0 auto 16px auto; 
+}
+footer .hero__actions { 
+  justify-content: center; 
+}
+
+      
     </style>
   </head>
   <body>
@@ -170,7 +202,7 @@
           <p class="lead">Your blue‑skinned, purple‑locked chaos goblin of the chain. Meme‑first, utility‑later but vibes <strong>right now</strong>. Built for fun traders, degen poets, and cartoon maximalists.
           </p>
           <div class="hero__actions">
-            <a class="btn btn-primary" href="#buy"><i class="ti ti-currency-bitcoin"></i> Launch DEX</a>
+            <a class="btn btn-primary" href="#buy"><img src="./dexscreener.png" alt="DEXScreener"> Launch DEX</a>
             <a class="btn btn-ghost" href="#tokenomics"><i class="ti ti-chart-pie"></i> Tokenomics</a>
             <a class="btn btn-ghost" href="#about"><i class="ti ti-brand-telegram"></i> Join Telegram</a>
           </div>
@@ -178,11 +210,9 @@
 
         <!-- Layered character stage (swap images below for your art) -->
         <div class="suizai-stage" aria-hidden="true">
-          <!-- Place the 3 character images next to this file and adjust paths if needed -->
-          <div class="cloud cloud--1"><img src="./suizai-1.jpeg" alt="SUIZAI pose 1"></div>
-          <div class="cloud cloud--2"><img src="./suizai-2.jpeg" alt="SUIZAI pose 2"></div>
-          <div class="cloud cloud--3"><img src="./suizai-3.jpeg" alt="SUIZAI pose 3"></div>
-        </div>
+  <img class="stage__img" src="./suizai-hero.jpg" alt="SUIZAI hero">
+</div>
+
       </div>
 
       <div class="marquee" aria-hidden="true">
@@ -293,7 +323,7 @@
 
     <footer>
       <div class="container stack" style="align-items:center;">
-        <img src="./suizai-mark.avif" alt="$SUIZAI mark" style="height:60px; filter: drop-shadow(0 6px 0 #00000070);">
+        <img src="./suizai-mark.avif" alt="$SUIZAI mark" class="footer__mark">
         <p>© 2025 $SUIZAI. Comics, chaos, community.</p>
         <div class="hero__actions" id="buy">
           <a class="btn btn-primary" href="#"><i class="ti ti-brand-telegram" aria-hidden="true"></i> Telegram</a>
