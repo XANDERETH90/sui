@@ -102,7 +102,16 @@
       }
       .nav > .container { display: flex; align-items: center; justify-content: space-between; }
       .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
-      .brand__logo { width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--sky-2), var(--sky-1)); border: 2px solid #000; box-shadow: inset 0 0 0 3px #ffffff20; }
+      .brand__logo {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          border: 2px solid #000;
+          object-fit: cover;
+          display: inline-block;
+          box-shadow: inset 0 0 0 3px #ffffff20;  /* subtle inner ring */
+          background: #000;                        /* fallback if image fails */
+        }
       .brand__name { font-family: 'Bangers'; font-size: 28px; color: var(--sun); -webkit-text-stroke: 1.5px #000; text-shadow: 0 3px 0 #00000080; }
       .nav__links { display: flex; align-items: center; gap: 18px; }
       .nav__links a {
@@ -248,6 +257,38 @@ footer .hero__actions {
 @media (max-width: 640px) {
   .suizai-stage { height: 420px; }
 }
+  /* === Cartoon clouds behind the Live Chart section === */
+#chart{
+  position: relative; /* ensure the ::before attaches correctly */
+}
+/* Clouds layer */
+#chart::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  /* layered 'cartoon' clouds in cool blues/purples */
+  background:
+    radial-gradient(circle at 10% 25%, #7fd3ff 0 12%, transparent 13% 100%),
+    radial-gradient(circle at 28% 18%, #a5e4ff 0 10%, transparent 11% 100%),
+    radial-gradient(circle at 35% 36%, #8bd2ff 0 14%, transparent 15% 100%),
+    radial-gradient(circle at 62% 22%, #7ec8ff 0 13%, transparent 14% 100%),
+    radial-gradient(circle at 78% 30%, #a5d9ff 0 12%, transparent 13% 100%),
+    radial-gradient(circle at 84% 48%, #8ad7ff 0 16%, transparent 17% 100%),
+    radial-gradient(circle at 18% 58%, #95d6ff 0 14%, transparent 15% 100%),
+    radial-gradient(circle at 48% 66%, #7fcaff 0 16%, transparent 17% 100%),
+    /* soft sky gradient under clouds */
+    linear-gradient(180deg, #241a67 0%, #1a1652 35%, #12123a 100%);
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* Lift the panel above the clouds */
+#chart .panel__frame{ position: relative; z-index: 1; }
+
+/* Optional: give the chart box a slightly translucent panel so clouds peek around edges */
+#chart .panel__frame{
+  background: linear-gradient(160deg, rgba(21,20,58,.96), rgba(15,14,44,.96) 40%, rgba(10,9,32,.96) 100%);
+}  
     </style>
   </head>
   <body>
@@ -255,8 +296,8 @@ footer .hero__actions {
     <nav class="nav">
       <div class="container">
         <a class="brand" href="#">
-          <span class="brand__logo" aria-hidden="true"></span>
-          <span class="brand__name">$SUIZAI</span>
+        <img class="brand__logo" src="./suizai-logo.png" alt="$SUIZAI logo">
+        <span class="brand__name">$SUIZAI</span>
         </a>
         <div class="nav__links">
           <a href="#about">About</a>
