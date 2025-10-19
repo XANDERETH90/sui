@@ -451,6 +451,53 @@ body.no-scroll{ overflow:hidden; }
 
 /* As an extra guard on all sizes, make the footer background own the very edge */
 footer { background-color: #0a0920; } /* same family as your footer gradient */
+/* === Seamless scrolling ticker === */
+.ticker{
+  overflow: hidden;
+  width: 100%;
+  border-top: 3px solid #000;        /* keep your comic frame look (optional) */
+  border-bottom: 3px solid #000;
+  background: #0f0e2c;               /* or transparent if you already have a bg */
+}
+
+.ticker__track{
+  display: inline-flex;
+  gap: 28px;
+  align-items: center;
+  white-space: nowrap;                /* ALWAYS single line */
+  will-change: transform;
+  animation: ticker-scroll 22s linear infinite;
+  padding: 12px 0;
+}
+
+/* duplicate content means 200% length; we scroll by 50% to loop flawlessly */
+@keyframes ticker-scroll{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker__item{
+  font-family: 'Bangers', system-ui;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  -webkit-text-stroke: 1.2px #000;
+  text-shadow: 0 3px 0 #00000080;
+  color: #fff;
+  font-size: clamp(18px, 2vw, 24px);
+  white-space: nowrap;                /* guard against wrapping on mobile */
+}
+.ticker__dot{
+  font-size: 28px;
+  color: #ffdf3a;
+  -webkit-text-stroke: 1px #000;
+}
+
+/* Mobile: keep it one line; reduce size a hair if needed */
+@media (max-width: 640px){
+  .ticker__track { gap: 22px; padding: 10px 0; }
+  .ticker__item  { font-size: 18px; }           /* adjust to avoid wrapping */
+  .ticker__dot   { font-size: 24px; }
+}
 
 
     </style>
@@ -510,25 +557,32 @@ footer { background-color: #0a0920; } /* same family as your footer gradient */
           </div>
         </div>
 
-        <!-- Layered character stage (swap images below for your art) -->
-        <div class="suizai-stage" aria-hidden="true">
-  <img class="stage__img" src="./suizai-hero.jpg" alt="SUIZAI hero">
-</div>
-      </div>
+        <div class="ticker" role="marquee" aria-label="SUIZAI ticker">
+  <div class="ticker__track">
+    <!-- sequence A -->
+    <span class="ticker__item">100% COMMUNITY</span>
+    <span class="ticker__dot">•</span>
+    <span class="ticker__item">LP BURNED</span>
+    <span class="ticker__dot">•</span>
+    <span class="ticker__item">CONTRACT RENOUNCED</span>
+    <span class="ticker__dot">•</span>
+    <span class="ticker__item">NO TAX</span>
+    <span class="ticker__dot">•</span>
+    <span class="ticker__item">MEME MAGIC</span>
 
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__inner">
-          <span>NO TAX</span>
-          <span>LP BURNED</span>
-          <span>RENOUNCED</span>
-          <span>100% COMMUNITY</span>
-          <span>NO TAX</span>
-          <span>LP BURNED</span>
-          <span>RENOUNCED</span>
-          <span>100% COMMUNITY</span>
-        </div>
-      </div>
-    </header>
+    <!-- sequence B (duplicate of A for seamless loop) -->
+    <span class="ticker__item" aria-hidden="true">100% COMMUNITY</span>
+    <span class="ticker__dot"  aria-hidden="true">•</span>
+    <span class="ticker__item" aria-hidden="true">LP BURNED</span>
+    <span class="ticker__dot"  aria-hidden="true">•</span>
+    <span class="ticker__item" aria-hidden="true">CONTRACT RENOUNCED</span>
+    <span class="ticker__dot"  aria-hidden="true">•</span>
+    <span class="ticker__item" aria-hidden="true">NO TAX</span>
+    <span class="ticker__dot"  aria-hidden="true">•</span>
+    <span class="ticker__item" aria-hidden="true">MEME MAGIC</span>
+  </div>
+</div>
+
 
     <!-- ABOUT -->
     <section class="panel" id="about">
