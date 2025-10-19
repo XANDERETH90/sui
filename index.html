@@ -227,13 +227,22 @@
   animation: floatY 9s ease-in-out infinite; 
 }
 
-/* icon inside buttons: keeps logo aligned with text baseline */
-.hero__actions .btn img { 
-  height: 1.2em; 
-  width: auto; 
-  display: inline-block; 
-  vertical-align: -2px; 
+/* Make all button icons flexible, and prioritize .btn-icon override */
+.hero__actions .btn img {
+  height: 1.2em;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
 }
+
+/* Force bigger size for the DEX logo */
+.hero__actions .btn img.btn-icon {
+  height: 2.4em !important;   /* overrides the smaller global height */
+  width: auto;
+  vertical-align: middle;
+}
+
 
 footer .footer__mark{
   height: 180px;
