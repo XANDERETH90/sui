@@ -373,6 +373,22 @@ body.no-scroll{ overflow:hidden; }
   /* Ensure the drawer can't cover desktop view even if toggled somehow */
   #mobileMenu[hidden] { display: none !important; }
 }
+/* Normalize the 'hidden' attribute so the drawer never occupies space until opened */
+[hidden] { display: none !important; }
+
+/* Mobile-only header layout: brand left, burger right (always visible inside the bar) */
+@media (max-width: 640px){
+  .nav > .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   /* left/right bar */
+    min-height: 68px;                 /* match .nav height */
+  }
+  .brand { display: flex !important; align-items: center; gap: 12px; }
+  .brand__name { display: inline; }   /* ensure the $SUIZAI text shows */
+  .burger { display: inline-flex; align-items: center; justify-content: center; }
+  .nav__links { display: none !important; }   /* keep desktop links hidden on mobile */
+}
 
 
     </style>
