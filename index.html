@@ -303,6 +303,70 @@ footer .hero__actions {
 }
 #chart .panel__frame{ position: relative; z-index: 1; }
 
+      /* Smooth anchor scrolling */
+html { scroll-behavior: smooth; }
+
+/* Burger button (hidden on desktop) */
+.burger{
+  display:none;
+  width:42px;height:42px;
+  border-radius:10px;
+  border:3px solid #000;
+  background:#ffffff15;
+  box-shadow:0 6px 0 #00000060;
+  position:relative;
+  cursor:pointer;
+}
+.burger span{
+  position:absolute; left:8px; right:8px; height:3px;
+  background:#fff; border:2px solid #000; border-radius:2px;
+  box-shadow:0 2px 0 #00000080;
+  transition:transform .25s ease, opacity .25s ease;
+}
+.burger span:nth-child(1){ top:10px; }
+.burger span:nth-child(2){ top:18px; }
+.burger span:nth-child(3){ top:26px; }
+
+/* X state */
+.burger[aria-expanded="true"] span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.burger[aria-expanded="true"] span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+/* Fullscreen drawer */
+.mobile-drawer{
+  position:fixed; inset:0; z-index:1000;
+  display:grid; place-items:center;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.10), transparent 60%),
+    linear-gradient(180deg, #120f2a 0%, #0a0920 100%);
+  border-top:3px solid #000;
+}
+.mobile-drawer .drawer-inner{
+  width:min(520px,88vw);
+  border:4px solid #000; border-radius:24px;
+  background: linear-gradient(160deg, #15143a, #0f0e2c 40%, #0a0920 100%);
+  box-shadow:0 14px 0 #00000070, 0 40px 120px #3d2bff50;
+  padding:24px;
+  display:grid; gap:12px; justify-items:center;
+}
+.mob-link{
+  font-family:'Bangers', system-ui; text-transform:uppercase; letter-spacing:.8px;
+  -webkit-text-stroke:1.2px #000; text-shadow:0 3px 0 #00000080;
+  color:#fff; text-decoration:none; font-size:28px; padding:8px 14px;
+  border-radius:12px; border:3px solid transparent;
+}
+.mob-link:hover{ border-color:#ffffff40; background:#ffffff12; }
+.mob-cta{ margin-top:6px; }
+
+/* Prevent background scroll when drawer open */
+body.no-scroll{ overflow:hidden; }
+
+/* Mobile breakpoint: hide desktop links, show burger */
+@media (max-width: 640px){
+  .nav__links{ display:none; }   /* you already hide this; keeping for clarity */
+  .burger{ display:inline-flex; align-items:center; justify-content:center; }
+}
+
 
     </style>
   </head>
@@ -315,6 +379,10 @@ footer .hero__actions {
         <span class="brand__name">$SUIZAI</span>
         </a>
         <div class="nav__links">
+          <!-- Mobile menu button -->
+          <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+          </button>
           <a href="#about">About</a>
           <a href="#tokenomics">Tokenomics</a>
           <a href="#how">How to Buy</a>
@@ -323,6 +391,21 @@ footer .hero__actions {
         </div>
       </div>
     </nav>
+    <!-- Mobile fullscreen drawer -->
+<div id="mobileMenu" class="mobile-drawer" hidden>
+  <div class="drawer-inner">
+    <a href="#about"       class="mob-link">About</a>
+    <a href="#tokenomics"  class="mob-link">Tokenomics</a>
+    <a href="#how"         class="mob-link">How to Buy</a>
+    <a href="#chart"       class="mob-link">Chart</a>
+    <div class="mob-cta">
+      <a class="btn btn-primary" href="#buy">
+        <img src="./dexscreener-btn.png" alt="DEXScreener" class="btn-icon">
+        Buy Now
+      </a>
+    </div>
+  </div>
+</div>
 
     <!-- HERO -->
     <header class="hero" id="home">
@@ -495,6 +578,21 @@ footer .hero__actions {
           layers.forEach((layer)=> layer.style.transform = 'translate(0,0)');
         });
       }
+      <script>
+  (function(){
+    const btn = document.querySelector('.burger');
+    const drawer = document.getElementById('mobileMenu');
+    if(!btn || !drawer) return;
+
+    const open = () => { drawer.hidden = false; btn.setAttribute('aria-expanded','true'); document.body.classList.add('no-scroll'); };
+    const close = () => { drawer.hidden = true; btn.setAttribute('aria-expanded','false'); document.body.classList.remove('no-scroll'); };
+
+    btn.addEventListener('click', () => (btn.getAttribute('aria-expanded') === 'true' ? close() : open()));
+    drawer.addEventListener('click', (e) => { if(e.target.classList.contains('mob-link')) close(); });
+    window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') close(); });
+  })();
+</script>
+
     </script>
   </body>
 </html>
