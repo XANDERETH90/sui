@@ -226,11 +226,15 @@
   vertical-align: -2px; 
 }
 
-/* footer logo: ~3x larger and centered above the buttons */
-footer .footer__mark { 
-  height: 180px; 
-  display: block; 
-  margin: 0 auto 16px auto; 
+footer .footer__mark{
+  height: 180px;
+  display: block;
+  margin: 32px auto 28px;      /* pushes it further down from the top of footer */
+  border: 4px solid #000;      /* border around image */
+  border-radius: 16px;          /* comic corners */
+  padding: 8px;                 /* breathing room inside border */
+  background: #0f0d2a;          /* subtle panel fill behind transparent edges */
+  box-shadow: 0 10px 0 #00000070;
 }
 footer .hero__actions { 
   justify-content: center; 
@@ -267,23 +271,20 @@ footer .hero__actions {
   overflow: visible; /* allow glow to breathe */
 }
 
-/* Background image layer */
-#chart::before{
-  content:"";
-  position:absolute;
-  inset: -40px 0 -40px 0;        /* extend a bit beyond for a nice bleed */
+/* Animated clouds image behind chart */
+#chart { position: relative; overflow: visible; }
+#chart .chart-clouds{
+  position: absolute;
+  inset: -40px 0 -40px 0;   /* nice bleed beyond the section */
+  width: 100%;
+  height: calc(100% + 80px);
+  object-fit: cover;
   z-index: 0;
-  background: url("./clouds-bg.svg") center/cover no-repeat;
+  pointer-events: none;
   filter: saturate(1.05) contrast(1.05);
 }
+#chart .panel__frame{ position: relative; z-index: 1; }
 
-/* Keep the chart panel above the background */
-#chart .panel__frame{
-  position: relative;
-  z-index: 1;
-  /* Slight transparency so the background vibe peeks around edges (optional) */
-  background: linear-gradient(160deg, rgba(21,20,58,.97), rgba(15,14,44,.97) 40%, rgba(10,9,32,.97) 100%);
-}
 
     </style>
   </head>
@@ -419,7 +420,9 @@ footer .hero__actions {
 
     <!-- CHART -->
     <section class="panel" id="chart">
-      <div class="container panel__frame stack">
+  <!-- Animated cloud background -->
+  <img src="./clouds-bg-anim.svg" alt="" aria-hidden="true" class="chart-clouds">
+  <div class="container panel__frame stack">
         <h2 class="headline">Live chart</h2>
         <div class="chart">
           <!-- Replace the placeholder pair address with your own when live -->
