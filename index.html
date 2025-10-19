@@ -498,6 +498,32 @@ footer { background-color: #0a0920; } /* same family as your footer gradient */
   .ticker__item  { font-size: 18px; }           /* adjust to avoid wrapping */
   .ticker__dot   { font-size: 24px; }
 }
+/* Desktop: reduce hero column gap + pull CTA row up a bit */
+@media (min-width: 1025px){
+  .hero__wrap{ gap: 16px; }      /* was 28px */
+  .hero__actions{ margin-top: 8px; }  /* was 16px */
+}
+/* Mobile: make Launch DEX, Tokenomics, Telegram same height */
+@media (max-width: 640px){
+  .hero__actions{
+    display: grid;
+    grid-template-columns: 1fr;  /* one per row, consistent heights */
+    gap: 10px;
+  }
+  .hero__actions .btn{
+    padding: 13px 18px;          /* same padding for all three */
+  }
+  /* bring the DEX logo down so height matches other buttons */
+  .hero__actions .btn img.btn-icon{
+    height: 1.6em !important;    /* was 2.4em → normalized */
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+/* Mobile: drop the ticker slightly so it doesn't touch the hero image */
+@media (max-width: 640px){
+  .ticker{ margin-top: 12px; }
+}
 
 
     </style>
